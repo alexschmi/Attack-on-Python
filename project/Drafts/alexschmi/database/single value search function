@@ -1,0 +1,5 @@
+# Query template to get the password for a given email
+    def read_login(self, email):
+        self.cursor.execute("""SELECT password FROM tbl_user WHERE email = ?""", (email,))
+        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
+        return rows[0][0]  # [0][0] returns the actual value of this tuple (and not the tuple itself)
