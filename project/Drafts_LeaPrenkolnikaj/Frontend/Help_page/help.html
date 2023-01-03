@@ -1,0 +1,25 @@
+{% extends "base.html" %} {% block title %}Help{% endblock %} {% block content %}
+
+<h1>Feeling lost?</h1>
+<h3>Here's our FAQ!</h3>
+<br/><br/>
+<details><summary><strong>How do I access Monty's?</strong></summary>
+<p style="margin-top: 12px;">In order to access the Flight Reservation System, you have to <a href="http://127.0.0.1:5000/sign-up" title="sign up">create an account</a> first. After that, you'll be able to <a href="http://127.0.0.1:5000/login" title="login">log into your account</a> and get started!</p>
+</details>&nbsp;
+
+<details><summary><strong>How do I reserve a seat?</strong></summary>
+<p style="margin-top: 12px;">Make sure that you are <a href="http://127.0.0.1:5000/login" title="login">logged in</a> - this way, you'll have access to all our features. The system will usually redirect you to the homepage automatically, if not <a href="http://127.0.0.1:5000" title="homepage">click here</a>. A seat chart will be displayed where you can see all the seats that are currently available. In order to reserve a seat, you'll have to enter its name (e.g. 1C, 2E, ...) into the dialogue field below. The system will check if the seat is still there and then ask you to confirm your choice. </p>
+</details>&nbsp;
+
+<details><summary><strong>Can I cancel my seat even after I already reserved it?</strong></summary>
+<p style="margin-top: 12px;">Yes, you can still cancel your seat <u>within 24 hours before the flight</u>. However, this action must be performed by our Monty's IT team, so if you really want to cancel your seat, please contact us.</p>
+</details>&nbsp;
+
+<details><summary><strong>Can I reserve multiple seats with the same account?</strong></summary>
+<p style="margin-top: 12px;">Yes.</p>
+</details>&nbsp;
+
+<details><summary><strong>I still have problems with the seat reservation system...</strong></summary>
+<p style="margin-top: 12px;">We'd really like to help you! Contact us via e-mail on aupport@montys.com or call 444 444.</p>
+</details>&nbsp;
+{% endblock %}
