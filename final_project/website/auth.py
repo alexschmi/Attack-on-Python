@@ -32,5 +32,6 @@ def sign_up():
         elif len(password1) < 7:
             pass
         else:
+            pass
 
     return render_template("sign_up.html")
