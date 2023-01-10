@@ -1,5 +1,5 @@
 from flask import Flask
-from flask_login import LoginManager
+# from flask_login import LoginManager
 
 def create_app():
     app = Flask(__name__)
@@ -14,7 +14,7 @@ def create_app():
     app.register_blueprint(views, url_prefix = '/')
     app.register_blueprint(auth, url_prefix = '/')
 
-    from .models import User, Reservation
+    # from .models import User, Reservation
 
     # create_database(app)                                  # from YT (other database)
 
