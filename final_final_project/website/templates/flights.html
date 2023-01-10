@@ -1,0 +1,105 @@
+{% extends "base.html" %} {% block title %}Help{% endblock %} {% block content %}
+
+<h1>Choose a seat!</h1>
+<h3>This graphic shows how our seats are arranged:</h3>
+<br/><br/>
+
+<style>
+  .center {
+    display: block;
+    margin: auto;
+  }
+</style>
+<img src="https://i.ibb.co/RcNDLr5/Seatmap.png" class="center" width="30%" height=""30% usemap="#seatmap">
+
+<map name="seatmap">
+  <area shape="rect" coords="61,134,191,262" href="#" alt="Seat 1A - Window Seat" title="Seat 1A - Window Seat">
+  <area shape="rect" coords="50,0,100,50" href="#" alt="Seat 1B" title="Seat 1B">
+  <area shape="rect" coords="100,0,150,50" href="#" alt="Seat 1C" title="Seat 1C">
+  <area shape="rect" coords="150,0,200,50" href="#" alt="Seat 1D" title="Seat 1D">
+  <area shape="rect" coords="200,0,250,50" href="#" alt="Seat 1E" title="Seat 1E">
+  <area shape="rect" coords="250,0,300,50" href="#" alt="Seat 1F" title="Seat 1F">
+  <!-- Add more seats as needed -->
+</map>
+
+<br/><br/>
+<h2>Book your seat:</h2>
+<form>
+  <label for="name">Name:</label><br>
+  <input type="text" id="name" name="name"><br>
+  <label for="phone">Phone:</label><br>
+  <input type="tel" id="phone" name="phone"><br>
+  <label for="flight">Flight:</label><br>
+  <select id="flight" name="flight">
+    <option value="flight1">Hogwarts</option>
+    <option value="flight2">Middle Earth</option>
+    <option value="flight3">Wonderland</option>
+  </select><br>
+  <label for="seat">Seat:</label><br>
+  <select id="seat" name="seat">
+    <option value="window">1A - Window</option>
+    <option value="middle">1B - Middle</option>
+    <option value="aisle">1C - Aisle</option>
+    <option value="aisle">1D - Aisle</option>
+    <option value="middle">1E - Middle</option>
+    <option value="aisle">1F - Window</option>
+    <option value="window">2A - Window</option>
+    <option value="middle">2B - Middle</option>
+    <option value="aisle">2C - Aisle</option>
+    <option value="aisle">2D - Aisle</option>
+    <option value="middle">2E - Middle</option>
+    <option value="aisle">2F - Window</option>
+    <option value="window">3A - Window</option>
+    <option value="middle">3B - Middle</option>
+    <option value="aisle">3C - Aisle</option>
+    <option value="aisle">3D - Aisle</option>
+    <option value="middle">3E - Middle</option>
+    <option value="aisle">3F - Window</option>
+    <option value="window">4A - Window</option>
+    <option value="middle">4B - Middle</option>
+    <option value="aisle">4C - Aisle</option>
+    <option value="aisle">4D - Aisle</option>
+    <option value="middle">4E - Middle</option>
+    <option value="aisle">4F - Window</option>
+    <option value="window">5A - Window</option>
+    <option value="middle">5B - Middle</option>
+    <option value="aisle">5C - Aisle</option>
+    <option value="aisle">5D - Aisle</option>
+    <option value="middle">5E - Middle</option>
+    <option value="aisle">5F - Window</option>
+    <option value="window">6A - Window</option>
+    <option value="middle">6B - Middle</option>
+    <option value="aisle">6C - Aisle</option>
+    <option value="aisle">6D - Aisle</option>
+    <option value="middle">6E - Middle</option>
+    <option value="aisle">6F - Window</option>
+    <option value="window">7A - Window</option>
+    <option value="middle">7B - Middle</option>
+    <option value="aisle">7C - Aisle</option>
+    <option value="aisle">7D - Aisle</option>
+    <option value="middle">7E - Middle</option>
+    <option value="aisle">7F - Window</option>
+    <option value="window">8A - Window</option>
+    <option value="middle">8B - Middle</option>
+    <option value="aisle">8C - Aisle</option>
+    <option value="aisle">8D - Aisle</option>
+    <option value="middle">8E - Middle</option>
+    <option value="aisle">8F - Window</option>
+    <option value="window">9A - Window</option>
+    <option value="middle">9B - Middle</option>
+    <option value="aisle">9C - Aisle</option>
+    <option value="aisle">9D - Aisle</option>
+    <option value="middle">9E - Middle</option>
+    <option value="aisle">9F - Window</option>
+    <option value="window">10A - Window</option>
+    <option value="middle">10B - Middle</option>
+    <option value="aisle">10C - Aisle</option>
+    <option value="aisle">10D - Aisle</option>
+    <option value="middle">10E - Middle</option>
+    <option value="aisle">10F - Window</option>
+  </select><br>
+  <input type="submit" value="Submit">
+</form>
+
+
+{% endblock %}
