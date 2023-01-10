@@ -96,3 +96,11 @@ class Database:
         self.cursor.execute("""SELECT email FROM tbl_user WHERE email = ?""", (email,name,))
         rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
         return rows[0][0]
+
+    def user_exists(self, email=""):
+        exists = False
+        self.cursor.execute("""SELECT * FROM tbl_user WHERE email = ?""", (email,))
+        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
+        if rows[0][0] != "":
+            exists = True
+        return exists
