@@ -1,11 +1,13 @@
 {% extends "base.html" %} {% block title %}Home{% endblock %} {% block content %}
 <br /><br />
 <h1>Monty's Flight Reservation</h1><br /><br />
-<h4>Please Log In or Sign Up in order to make a flight-reservation:</h4><br />
-<form>
-    <button type="submit" class="btn btn-primary">Log In</button>
-    <br /><br />
-    <button type="submit" class="btn btn-primary">Sign Up</button>
-
+<h4>Please select Login or Sign Up in order to make a flight-reservation:</h4><br />
+<form action="/login">
+    <button type="submit" class="btn btn-primary" > Login </button>
 </form>
+<br />
+<form action="/sign-up">
+        <button type="submit" class="btn btn-primary" > Sign Up </button>
+</form>
+
 {% endblock %}
