@@ -92,4 +92,7 @@ class Database:
         rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
         return rows[0][0]  # [0][0] returns the actual value of this tuple (and not the tuple itself)
 
-
+    def read_current_user(self,email,name):
+        self.cursor.execute("""SELECT email FROM tbl_user WHERE email = ?""", (email,name,))
+        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
+        return rows[0][0]
