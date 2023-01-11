@@ -35,7 +35,7 @@ def sign_up():
         email = request.form.get('email')
         name = request.form.get('first_name')
         surname = request.form.get('surname')
-        username = request.form.get('username')
+        username = email[0:-4]
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
@@ -47,11 +47,13 @@ def sign_up():
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
-        elif db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256')) == False:
-            flash('This user already exists!', category='error')
         else:
-            db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256'))
-            flash('Account created!', category='success')
+            if db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256')) == False:
+                flash('This user already exists!', category='error')
+            else:
+                db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256'))
+                current_user=username
+                flash('Account created!', category='success')
 
             # login_user(new_user, remember = True)
             # return redirect(url_for('views.home'))
