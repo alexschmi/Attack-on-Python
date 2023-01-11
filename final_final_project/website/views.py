@@ -23,7 +23,7 @@ def reservation():
 #         if len(name) < 2:
 #             flash('Name must be greater than 1 character.', category='error')
 #         else:
-#             # Insert new User into the database
+#             # Insert new Reservation into the database
 #             flash('Reservation completed!', category='success')
 
     return render_template("flights.html")
