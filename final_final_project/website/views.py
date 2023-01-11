@@ -16,7 +16,7 @@ def help():
 def reservation():
 #     if request.method == 'POST':
 #         name = request.form.get('name')
-#         phone = request.form.get('phone')
+#         surname = request.form.get('surname')
 #         flight = request.form.get('flight')
 #         seat = request.form.get('seat')
 #
