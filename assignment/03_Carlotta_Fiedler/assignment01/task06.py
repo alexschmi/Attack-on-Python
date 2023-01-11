@@ -1,4 +1,3 @@
-
 # Task 06 - Decimal to Octal Conversion
 # a) Converting Integers
 def int_dec2oct(dec):

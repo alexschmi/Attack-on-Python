@@ -5,27 +5,16 @@ from __main__ import db
 
 auth = Blueprint('auth', __name__)
 
-class User:
-    def __init__(self, firstName, surName, email, password):
-        self.name = firstName
-        self.surname = surName
-        self.email = email
-        db.insert_user(name=firstName, surname=surName, username=email[0:-4], email=email,
-                       password=generate_password_hash(password, method='sha256'))
-
-
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
 
-        # TO DO: check whether email exists in user db
-
-        if user:
-            if check_password_hash(user.password, password):
+        if db.read_login(email) != -1:
+            if check_password_hash(db.read_login(email), password):
                 flash('Logged in successfully!', category = 'success')
-                return redirect(url_for('views.home'))
+                # return redirect(url_for('views.home'))
             else:
                 flash('Incorrect password, try again.', category='error')
         else:
@@ -38,34 +27,33 @@ def login():
 @login_required
 def logout():
     logout_user()
-    return redirect(url_for('auth.login'))
-
+    # return redirect(url_for('auth.login'))
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':
         email = request.form.get('email')
-        firstName = request.form.get('firstName')
-        surName = request.form.get('surName')
+        name = request.form.get('first_name')
+        surname = request.form.get('surname')
+        username = request.form.get('username')
         password1 = request.form.get('password1')
         password2 = request.form.get('password2')
 
         if len(email) < 4:
             flash('Email must be greater than 3 characters.', category='error')
-        elif len(firstName) < 2:
+        elif len(name) < 2:
             flash('First Name must be greater than 1 character.', category='error')
         elif password1 != password2:
             flash('Passwords don\'t match.', category='error')
         elif len(password1) < 7:
             flash('Password must be at least 7 characters.', category='error')
+        elif db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256')) == False:
+            flash('This user already exists!', category='error')
         else:
-            # Insert new User into the database
-            # if not user_exists(email):
-            #     new_user = User(firstName, surName, email, password1)
-            # else:
-            #     print("User already exists.")
+            db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256'))
+            flash('Account created!', category='success')
+
             # login_user(new_user, remember = True)
-            # flash('Account created!', category='success')
-            return redirect(url_for('views.home'))
+            # return redirect(url_for('views.home'))
 
     return render_template("sign_up.html")

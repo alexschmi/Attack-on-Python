@@ -4,7 +4,7 @@ from datetime import datetime
 
 class Database:
     def __init__(self):
-        self.connection = sqlite3.connect("asr.db")  # Creates database
+        self.connection = sqlite3.connect("asr.db", check_same_thread=False)  # Creates database, multithreading is allowed
         self.cursor = self.connection.cursor()    # To communicate/interact with the database
         self.seats = np.genfromtxt("website\chartIn.txt", skip_header=1, dtype="str")   # Generates array from chartIn.txt
 
@@ -59,10 +59,14 @@ class Database:
                 self.cursor.execute("""INSERT OR IGNORE INTO tbl_seat (seat_ID, seat_type_ID) VALUES(?,?)""", (index, 1))
                 self.connection.commit()
 
-    # Inserts user information into tbl_user
+    # Inserts user information into tbl_user and checks whether a user already exists or not
     def insert_user(self, name, surname, username, email, password):
-        self.cursor.execute("""INSERT OR IGNORE INTO tbl_user (name, surname, username, email, password) VALUES(?,?,?,?,?)""", (name, surname, username, email, password))
-        self.connection.commit()
+        try: # When user does not already exist, create one
+            self.cursor.execute("""INSERT INTO tbl_user (name, surname, username, email, password) VALUES(?,?,?,?,?)""", (name, surname, username, email, password))
+            self.connection.commit()
+            return True # True = succesful, user did not already exist
+        except sqlite3.Error: # UNIQUE-contraint fails because a user already exists, catch the error and return false
+            return False # False = error, user already exists
 
     # Inserts seat_type information into tbl_seat_type
     def insert_seat_type(self, seat_type, price):
@@ -88,19 +92,10 @@ class Database:
 
     # Query template to get the password for a given email
     def read_login(self, email):
-        self.cursor.execute("""SELECT password FROM tbl_user WHERE email = ?""", (email,))  # The comma after the variable is mandatory!!!
-        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
-        return rows[0][0]  # [0][0] returns the actual value of this tuple (and not the tuple itself)
+        try: # If the given email exists, return the password
+            self.cursor.execute("""SELECT password FROM tbl_user WHERE email = ?""", (email,))  # The comma after the variable is mandatory!!!
+            rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
+            return rows[0][0]  # [0][0] returns the actual value of this tuple (and not the tuple itself)
+        except IndexError: # If given email does not exist, catch the IndexError and return false
+            return -1 # -1 = the given email does not exist
 
-    def read_current_user(self,email,name):
-        self.cursor.execute("""SELECT email FROM tbl_user WHERE email = ?""", (email,name,))
-        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
-        return rows[0][0]
-
-    def user_exists(self, email=""):
-        exists = False
-        self.cursor.execute("""SELECT * FROM tbl_user WHERE email = ?""", (email,))
-        rows = self.cursor.fetchall()  # fetchall by default generates list of tuples
-        if rows[0][0] != "":
-            exists = True
-        return exists
