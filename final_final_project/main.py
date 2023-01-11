@@ -1,4 +1,4 @@
-from website import create_app
+from website.__init__ import create_app
 from website.database import Database
 
 # Creating the database
