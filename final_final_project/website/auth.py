@@ -2,8 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, login_required, logout_user, current_user
 
-from .main import db
-from .models import User
+# from . import db
 
 
 
@@ -55,9 +54,10 @@ def sign_up():
             if db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256')) == False:
                 flash('This user already exists!', category='error')
             else:
-                new_user = User(email=email, name=name, password=generate_password_hash(password1, method='sha256'))
-                db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256'))
+                new_user = [name, email, generate_password_hash(password1, method='sha256')]
                 login_user(new_user, remember=True)
+                db.insert_user(name, surname, username, email, password=generate_password_hash(password1, method='sha256'))
+
                 flash('Account created!', category='success')
                 return redirect(url_for('views.home'))
 
