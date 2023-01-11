@@ -6,6 +6,8 @@ db = Database()     # Instantiate the Database class
 db.create_tables()  # Create all tables
 db.insert_seat()     # Initialize seat indexes
 
+# -----
+
 app = create_app()
 
 if __name__ == '__main__':
